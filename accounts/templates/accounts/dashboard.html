@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="navbar">
+    Easy Fitness
+</div>
+
+<div class="container">
+    <h2>Welcome, {{ request.user.username }}</h2>
+
+    <a href="/workouts/add/">➕ Add Workout</a>
+    <a href="/logout/">🚪 Logout</a>
+
+    <hr>
+
+    <h3>Your Workouts</h3>
+
+    {% if workouts %}
+        {% for workout in workouts %}
+            <div class="workout-card">
+                <strong>{{ workout.name }}</strong><br>
+                Type: {{ workout.workout_type }}<br>
+                Difficulty: {{ workout.difficulty }}<br>
+                Duration: {{ workout.duration }} minutes<br>
+                Notes: {{ workout.notes }}<br>
+                Date: {{ workout.date }}<br>
+
+                <a href="/workouts/edit/{{ workout.id }}/">✏ Edit</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No workouts added yet.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

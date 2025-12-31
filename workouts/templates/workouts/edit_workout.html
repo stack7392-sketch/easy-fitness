@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Workout</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="navbar">Easy Fitness</div>
+
+<div class="container">
+    <h2>Edit Workout</h2>
+
+    <form method="post">
+    {% csrf_token %}
+
+    <input type="text" name="name" value="{{ workout.name }}" required><br><br>
+
+    <input type="text" name="workout_type" value="{{ workout.workout_type }}" required><br><br>
+
+    <input type="number" name="duration" value="{{ workout.duration }}" required><br><br>
+
+    <select name="difficulty" required>
+        <option value="Easy" {% if workout.difficulty == "Easy" %}selected{% endif %}>Easy</option>
+        <option value="Medium" {% if workout.difficulty == "Medium" %}selected{% endif %}>Medium</option>
+        <option value="Hard" {% if workout.difficulty == "Hard" %}selected{% endif %}>Hard</option>
+    </select><br><br>
+
+    <textarea name="notes">{{ workout.notes }}</textarea><br><br>
+
+    <button type="submit">Update Workout</button>
+</form>
+
+
+    <br>
+    <a href="/dashboard/">⬅ Back</a>
+</div>
+
+</body>
+</html>
