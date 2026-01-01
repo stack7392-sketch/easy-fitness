@@ -5,39 +5,91 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
+    <span class="menu-btn" onclick="openSettings()">☰</span>
     Easy Fitness
 </div>
 
+<!-- MAIN DASHBOARD -->
 <div class="container">
-    <h2>Welcome, {{ request.user.username }}</h2>
 
-    <a href="/workouts/add/">➕ Add Workout</a>
-    <a href="/logout/">🚪 Logout</a>
+    <h2>Welcome, {{ username }}</h2>
+
+    <div class="actions">
+        <a href="/workouts/add/">➕ Add Workout</a>
+        <a href="/premium/" style="margin-left:15px;">💎 Upgrade to Premium</a>
+    </div>
 
     <hr>
 
+    <!-- WORKOUT SECTION -->
     <h3>Your Workouts</h3>
 
     {% if workouts %}
         {% for workout in workouts %}
             <div class="workout-card">
                 <strong>{{ workout.name }}</strong><br>
-                Type: {{ workout.workout_type }}<br>
-                Difficulty: {{ workout.difficulty }}<br>
                 Duration: {{ workout.duration }} minutes<br>
-                Notes: {{ workout.notes }}<br>
-                Date: {{ workout.date }}<br>
-
-                <a href="/workouts/edit/{{ workout.id }}/">✏ Edit</a>
+                Date: {{ workout.date }}
             </div>
         {% endfor %}
     {% else %}
         <p>No workouts added yet.</p>
     {% endif %}
+
+    <hr>
+
+    <!-- DIET PLAN -->
+    <h3>Your Diet Plan</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <label><strong>Enter your weight (kg):</strong></label><br>
+        <input type="number" name="weight" required>
+        <button type="submit">View Diet</button>
+    </form>
+
+    {% if diet_plan %}
+        <div class="diet-card">
+            <h4>{{ diet_plan.type }}</h4>
+            <p><strong>Based on weight:</strong> {{ weight }} kg</p>
+            <ul>
+                {% for item in diet_plan.items %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
 </div>
+
+<!-- SETTINGS SLIDE PANEL -->
+<div id="settings-panel" class="settings-panel">
+    <span class="close-btn" onclick="closeSettings()">✖</span>
+
+    <h3>Settings</h3>
+    <ul>
+        <li><a href="#">⏱ Stopwatch</a></li>
+        <li><a href="#">❓ Help</a></li>
+        <li><a href="#">ℹ About Us</a></li>
+        <li><a href="/premium/">⭐ Upgrade to Premium</a></li>
+        <li><a href="/logout/" class="logout">🚪 Logout</a></li>
+    </ul>
+</div>
+
+<!-- JS -->
+<script>
+function openSettings() {
+    document.getElementById("settings-panel").style.left = "0";
+}
+function closeSettings() {
+    document.getElementById("settings-panel").style.left = "-50%";
+}
+</script>
 
 </body>
 </html>

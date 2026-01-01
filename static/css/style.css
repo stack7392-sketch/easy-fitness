@@ -1,3 +1,15 @@
+/* RESET DEFAULT BROWSER SPACING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f6f8;
+    font-family: Arial, sans-serif;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
@@ -5,12 +17,25 @@ body {
     padding: 0;
 }
 
+/* NAVBAR */
 .navbar {
-    background-color: #1e88e5;
-    padding: 15px;
+    width:100%;
+    background: #1e88e5;
     color: white;
+    padding: 15px 20px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
+
+/* MENU ICON */
+.menu-btn {
+    font-size: 26px;
+    cursor: pointer;
+    margin-right: 15px;
+    color: white;
+}
+
 
 .container {
     width: 80%;
@@ -47,3 +72,45 @@ button:hover {
     border-radius: 5px;
     background: #fafafa;
 }
+
+.diet-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.diet-card h4 {
+    margin-bottom: 5px;
+    color: #2c7be5;
+}
+/* SETTINGS SLIDE PANEL */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    left: -50%;          /* HIDDEN BY DEFAULT */
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+    font-size: 22px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+

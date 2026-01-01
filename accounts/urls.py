@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.auth_page, name='auth'),
     path('logout/', views.user_logout, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('settings/', views.settings_page, name='settings'),
 ]
